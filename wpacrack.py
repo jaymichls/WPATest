@@ -75,6 +75,7 @@
 
 import os,sys,operator,time
 import subprocess as sub
+import wirelessclasses as wc
 
 #Usage
 def usage():
@@ -303,10 +304,10 @@ def auto():
 				stationMac = l[0]
 				clientBssid = l[5]
 
-				newClient = Client(stationMac, clientBssid)
+				newClient = wc.Client(stationMac, clientBssid)
 				for ap in allAPS:
-					if ap.bssid == newClient.bssid:
-						ap.addClient(newClient)
+					if wc.AccessPoint.bssid == newClient.bssid:
+						wc.AccessPoint.addClient(newClient)
 
 		f.close()
 		# TODO delete temp file 
@@ -657,28 +658,6 @@ def logo():
 	print "       '-_~-,       ` `   ./`       "
 	print "          `'{_            )         "
 	print "              ^^\..___,.--`         "+W
-
-#Each AP should have a list weither empty or not of all clients associated with the AP	
-class AP:		
-	def __init__(self, bssid, channel, encrypt, essid):
-		self.bssid = bssid
-		self.channel = channel
-		self.encrypt = encrypt
-		self.essid = essid
-		self.clientsList = []
-		self.numberOfClients = 0
-		
-	def info(self):
-		print self.essid
-
-	def addClient(self, client):
-		self.clientList[self.numberOfClients] = client
-		self.numberOfClients +=1
-
-class Client:
-	def __init__(self, stationMac, bssid):
-		self.stationMac = stationMac
-		self.bssid = bssid
 
 #FUNCTIONALITY 
 #-e, --endding    Don't change the vendor bytes.
