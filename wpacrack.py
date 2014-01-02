@@ -75,7 +75,12 @@
 
 import os,sys,operator,time
 import subprocess as sub
-import wirelessclasses as wc
+import WirelessClasses as wc
+
+# TODO Test this.
+lib_path = os.path.abspath('../PythonSqlLite/')
+sys.path.append(lib_path)
+import dbConnection as dbconn
 
 #Usage
 def usage():
